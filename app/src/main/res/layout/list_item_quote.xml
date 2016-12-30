@@ -12,6 +12,7 @@
         android:id="@+id/symbol"
         style="@style/StockSymbolTextStyle"
         android:layout_width="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         tools:text="GOOG" />
@@ -25,6 +26,7 @@
         <TextView
             android:id="@+id/price"
             style="@style/BidPriceTextStyle"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10sp"
@@ -33,6 +35,7 @@
         <TextView
             android:id="@+id/change"
             style="@style/PercentChangeTextStyle"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/percent_change_pill_green"

@@ -8,7 +8,7 @@ repositories {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.udacity.stockhawk"
@@ -64,4 +64,6 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'net.sf.opencsv:opencsv:2.3'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    compile 'com.android.support:cardview-v7:25.0.1'
+
 }
