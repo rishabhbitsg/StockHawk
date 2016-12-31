@@ -1,6 +1,7 @@
 package com.udacity.stockhawk.ui;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -65,7 +66,14 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        mLabel = getIntent().getStringExtra(STOCK_LABEL);
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(STOCK_LABEL)) {
+            mLabel = intent.getStringExtra(STOCK_LABEL);
+        } else {
+            mLabel = intent.getData().getLastPathSegment();
+        }
+
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
     }
@@ -138,18 +146,15 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             YAxis yAxis = mLineChart.getAxisLeft();
             XAxis xAxis = mLineChart.getXAxis();
 
-            xAxis.setDrawAxisLine(false);
             xAxis.setDrawLabels(false);
             xAxis.setDrawGridLines(false);
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
 //            mLineChart.getAxisLeft().setAxisMinimum(0f);
 //            mLineChart.getAxisLeft().setAxisMaximum(150f);
-            mLineChart.getAxisRight().setEnabled(false);
+            mLineChart.getAxisRight().setDrawLabels(false);
+            mLineChart.getAxisRight().setDrawGridLines(false);
 
-
-            yAxis.setDrawGridLines(false);
-            yAxis.setDrawAxisLine(false);
-            yAxis.setDrawLabels(false);
+            yAxis.setTextColor(getResources().getColor(android.R.color.white));
 
             mLineChart.setData(lineData);
             Description description = new Description();

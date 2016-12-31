@@ -1,5 +1,7 @@
 package com.udacity.stockhawk.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -190,6 +192,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             PrefUtils.toggleDisplayMode(this);
             setDisplayModeMenuItemIcon(item);
             adapter.notifyDataSetChanged();
+
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
+                    new ComponentName(this, getClass()));
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
+
             return true;
         }
         return super.onOptionsItemSelected(item);

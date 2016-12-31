@@ -37,8 +37,24 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name=".ui.DetailActivity"
-            />
+        <activity android:name=".ui.DetailActivity" />
+
+        <receiver android:name=".ui.NewAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.udacity.stockhawk.ACTION_DATA_UPDATED"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".data.StockRemoteViewService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="true"></service>
     </application>
 
 </manifest>
