@@ -37,7 +37,8 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name=".ui.DetailActivity" />
+        <activity android:name=".ui.DetailActivity"
+            android:parentActivityName=".ui.MainActivity"/>
 
         <receiver android:name=".ui.NewAppWidget">
             <intent-filter>

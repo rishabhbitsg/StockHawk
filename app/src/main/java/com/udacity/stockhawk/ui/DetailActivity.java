@@ -8,22 +8,16 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IFillFormatter;
-import com.github.mikephil.charting.formatter.LargeValueFormatter;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.EntryXComparator;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
@@ -32,14 +26,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-import static android.R.attr.id;
-import static android.R.attr.y;
 
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -56,6 +47,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     TextView mPercentChangeView;
     @BindView(R.id.value_change)
     TextView mValueChangeView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private String mLabel;
 
     private final int LOADER_ID = 0;
@@ -73,6 +67,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         } else {
             mLabel = intent.getData().getLastPathSegment();
         }
+
+        setSupportActionBar(toolbar);
 
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
@@ -160,6 +156,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             Description description = new Description();
             description.setEnabled(false);
             mLineChart.getLegend().setEnabled(false);
+            mLineChart.setTouchEnabled(false);
             mLineChart.setDescription(description);
             mLineChart.invalidate();
         }

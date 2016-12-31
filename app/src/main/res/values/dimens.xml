@@ -7,4 +7,15 @@ Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+    <dimen name="diveder_width">2dp</dimen>
+    <dimen name="fab_border_width">0dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_translation_z">12dp</dimen>
+    <dimen name="margin_medium">4dp</dimen>
+    <dimen name="margin_price">10sp</dimen>
+    <dimen name="padding_percent_change">3dp</dimen>
+    <dimen name="toolbar_content_inset">0dp</dimen>
+    <dimen name="margin_price_detail">64dp</dimen>
+    <dimen name="divider_height">20dp</dimen>
 </resources>

@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.ui.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
+import static com.udacity.stockhawk.R.id.change;
+import static com.udacity.stockhawk.R.id.price;
+
 public final class QuoteSyncJob {
 
     private static final int ONE_OFF_ID = 2;
@@ -39,6 +43,7 @@ public final class QuoteSyncJob {
 
     private QuoteSyncJob() {
     }
+
 
     static void getQuotes(Context context) {
 
@@ -73,11 +78,41 @@ public final class QuoteSyncJob {
 
 
                 Stock stock = quotes.get(symbol);
+                if (stock == null) {
+                    PrefUtils.removeStock(context, symbol);
+                    continue;
+                }
+
                 StockQuote quote = stock.getQuote();
 
-                float price = quote.getPrice().floatValue();
-                float change = quote.getChange().floatValue();
-                float percentChange = quote.getChangeInPercent().floatValue();
+                if (quote == null) {
+                    PrefUtils.removeStock(context, symbol);
+                    continue;
+                }
+
+
+                float price, change, percentChange;
+
+                if (quote.getPrice() != null) {
+                    price = quote.getPrice().floatValue();
+                } else {
+                    PrefUtils.removeStock(context, symbol);
+                    continue;
+                }
+
+                if (quote.getPrice() != null) {
+                    change = quote.getChange().floatValue();
+                } else {
+                    PrefUtils.removeStock(context, symbol);
+                    continue;
+                }
+
+                if (quote.getPrice() != null) {
+                    percentChange = quote.getChangeInPercent().floatValue();
+                } else {
+                    PrefUtils.removeStock(context, symbol);
+                    continue;
+                }
 
                 // WARNING! Don't request historical data for a stock that doesn't exist!
                 // The request will hang forever X_x
